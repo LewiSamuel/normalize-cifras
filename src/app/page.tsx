@@ -3,7 +3,7 @@ import { url } from "inspector";
 import React, { useEffect, useState } from "react";
 
 
-function Navbar() {
+function Navbar({ cifras }: { cifras: string[] }) {
   return (
     <nav style={{
       width: "100%",
@@ -15,6 +15,8 @@ function Navbar() {
       boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
     }}>
       CifraClub
+
+      <button onClick={() => tratarCifra(cifras)}>tratar cifra</button>
     </nav>
   );
 }
@@ -134,6 +136,7 @@ export default function Home() {
       }
       // Aqui você pode fazer algo com o conteúdo da cifra, como exibi-lo em um modal ou redirecionar para outra página
       // console.log(data.cifra);
+      tratarCifra(data.cifra)
       return data.cifra;
     } catch (error) {
       console.error("Erro ao buscar a cifra:", error);
@@ -152,7 +155,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      <Navbar cifras={cifras} />
       <main style={{ padding: "2rem" }}>
         <h1>Minhas cifras</h1>
         {cifras.length === 0 ? (
@@ -175,4 +178,9 @@ export default function Home() {
       />
     </>
   );
+}
+
+function tratarCifra(cifra: any) {
+  const cifraLines = cifra[0].split("\n");
+  console.log(cifraLines)
 }
